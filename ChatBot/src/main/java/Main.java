@@ -37,6 +37,7 @@ public class Main {
         pipeList.add(new CharSequenceLowercase());
         pipeList.add(new CharSequence2TokenSequence(Pattern.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")));
         pipeList.add(new TokenSequence2Stem());
+        pipeList.add(new TokenSequenceLowercase());
         pipeList.add(new TokenSequenceRemoveStopwords(new File("stopStem.txt"), "UTF-8", false, false, false));
         pipeList.add(new TokenSequence2File(pw));
 
@@ -66,6 +67,7 @@ public class Main {
         pipeList.add(new CharSequenceLowercase());
         pipeList.add(new CharSequence2TokenSequence(Pattern.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")));
         pipeList.add(new TokenSequence2Stem());
+        pipeList.add(new TokenSequenceLowercase());
         pipeList.add(new TokenSequenceRemoveStopwords(new File("stopStem.txt"), "UTF-8", false, false, false));
         pipeList.add(new TokenSequence2FeatureSequence());
 
@@ -106,6 +108,7 @@ public class Main {
         InstanceList pipeline;
         ArrayList<Pipe> pipeList = new ArrayList<Pipe>();
         pipeList.add(new CharSequence2TokenSequence(Pattern.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")));
+        pipeList.add(new TokenSequenceLowercase());
         pipeList.add(new TokenSequence2FeatureSequence());
         pipeline = new InstanceList(new SerialPipes(pipeList));
         Pattern p = Pattern.compile("(.*)");
@@ -120,7 +123,7 @@ public class Main {
 
         model.setNumThreads(4);
         model.setNumIterations(500);
-        model.setSaveSerializedModel(50, "./models/model_Logs.bin");
+        model.setSaveSerializedModel(250, "./models/model_Logs.bin");
         model.estimate();
 
         return model;
